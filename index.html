@@ -45,7 +45,7 @@
       background: #ffffff;
       border: 5px solid var(--primary);
       border-radius: 32px;
-      padding: 25px;
+      padding: 28px;
       box-shadow: 0 12px 0 #fcd34d;
       text-align: center;
       position: relative;
@@ -58,7 +58,7 @@
     }
 
     h1 { font-size: 2.5rem; color: #d97706; margin: 10px 0; }
-    p { font-size: 1.3rem; color: #475569; margin: 8px 0 20px 0; }
+    p { font-size: 1.35rem; color: #475569; margin: 8px 0 20px 0; }
 
     .btn-big {
       font-size: 1.8rem;
@@ -73,6 +73,37 @@
     }
     .btn-big:active { transform: translateY(6px); box-shadow: 0 2px 0 #b45309; }
 
+    /* ================= 關卡講解版面（Intro Screen） ================= */
+    .stage-badge {
+      padding: 8px 26px;
+      border-radius: 30px;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .rule-card {
+      background: #fffbeb;
+      border: 3px solid #fde68a;
+      border-radius: 24px;
+      padding: 25px 35px;
+      width: 100%;
+      max-width: 850px;
+      text-align: left;
+      margin: 15px 0 28px 0;
+      font-size: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .rule-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+    .rule-item:last-child { margin-bottom: 0; }
+
     .hud {
       width: 100%;
       display: flex;
@@ -83,11 +114,11 @@
       border-radius: 20px;
       border: 3px solid #fde68a;
       margin-bottom: 12px;
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       font-weight: 900;
     }
 
-    /* ================= 第一關：真實掉落接接樂 ================= */
+    /* ================= 第一關：純拖拉接接樂 ================= */
     .fall-arena {
       position: relative;
       width: 100%;
@@ -98,19 +129,18 @@
       overflow: hidden;
     }
 
-    /* 畫面中線分隔區 */
     .zone-divider {
       position: absolute;
       top: 0; bottom: 0; left: 50%;
       width: 4px;
-      border-left: 4px dashed #fcd34d;
+      border-left: 4px dashed #94a3b8;
       pointer-events: none;
     }
 
     .zone-bg-left {
       position: absolute;
       top: 0; bottom: 0; left: 0; width: 50%;
-      background: rgba(59, 130, 246, 0.06);
+      background: rgba(59, 130, 246, 0.08);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -122,7 +152,7 @@
     .zone-bg-right {
       position: absolute;
       top: 0; bottom: 0; right: 0; width: 50%;
-      background: rgba(249, 115, 22, 0.06);
+      background: rgba(249, 115, 22, 0.08);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -132,26 +162,25 @@
     }
 
     .basket-label {
-      padding: 14px 30px;
+      padding: 16px 32px;
       border-radius: 20px;
-      font-size: 1.6rem;
+      font-size: 1.65rem;
       font-weight: 900;
       color: white;
       box-shadow: 0 6px 0 rgba(0,0,0,0.15);
     }
 
-    /* 跌落嘅情境牌（可左右拖拉） */
     .falling-item {
       position: absolute;
-      top: -80px;
-      padding: 18px 28px;
+      top: -60px;
+      padding: 20px 32px;
       background: #ffffff;
       border: 5px solid #f59e0b;
       border-radius: 24px;
-      font-size: 1.85rem;
+      font-size: 1.9rem;
       font-weight: 900;
       color: #1e293b;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.18);
       cursor: grab;
       white-space: nowrap;
       z-index: 10;
@@ -160,25 +189,51 @@
 
     .falling-item.dragging {
       border-color: #ec4899;
-      transform: translateX(-50%) scale(1.08);
-      box-shadow: 0 15px 30px rgba(236, 72, 153, 0.35);
+      background: #fdf2f8;
+      transform: translateX(-50%) scale(1.1);
+      box-shadow: 0 15px 30px rgba(236, 72, 153, 0.4);
     }
 
-    /* ================= 第二關：情境配對 ================= */
+    /* ================= 第二關：Bing Bong 劇情＋道別選擇 ================= */
+    .energy-meter {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .energy-bar-bg {
+      width: 180px;
+      height: 22px;
+      background: #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid #94a3b8;
+    }
+    .energy-bar-fill {
+      height: 100%;
+      width: 100%;
+      background: #10b981;
+      transition: width 0.25s, background 0.25s;
+    }
+
     .quiz-box {
       background: #f1f5f9;
-      padding: 25px 35px;
+      padding: 22px 30px;
       border-radius: 22px;
-      font-size: 1.85rem;
+      font-size: 1.75rem;
       font-weight: bold;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       width: 100%;
+      line-height: 1.45;
+      border-left: 8px solid #3b82f6;
+      text-align: left;
     }
-    .options-col { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+
+    .options-col { display: flex; flex-direction: column; gap: 14px; width: 100%; }
+
     .btn-opt {
       width: 100%;
-      padding: 20px 25px;
-      font-size: 1.5rem;
+      padding: 18px 25px;
+      font-size: 1.45rem;
       font-weight: bold;
       border: 3px solid #cbd5e1;
       border-radius: 20px;
@@ -186,14 +241,27 @@
       color: var(--dark);
       cursor: pointer;
       text-align: left;
+      transition: transform 0.1s, background 0.15s;
     }
-    .btn-opt:active { background: #fef3c7; border-color: var(--primary); }
+    .btn-opt:active { transform: scale(0.98); }
+    .btn-opt.wrong-flash {
+      background: #fee2e2;
+      border-color: #ef4444;
+      color: #b91c1c;
+      animation: shake 0.35s;
+    }
 
-    /* ================= 第三關：Bing Bong 火箭狂篤 ================= */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+
+    /* ================= 第三關：正負能量球大混戰 ================= */
     .rocket-arena {
       position: relative;
       width: 100%;
-      height: 380px;
+      height: 400px;
       background: linear-gradient(180deg, #0f172a 0%, #1e3a8a 100%);
       border-radius: 26px;
       overflow: hidden;
@@ -203,26 +271,40 @@
       width: 90%; height: 32px;
       background: #334155;
       border-radius: 20px;
-      margin: 12px auto;
+      margin: 10px auto;
       overflow: hidden;
       border: 3px solid #94a3b8;
     }
     .progress-bar {
-      height: 100%; width: 15%;
+      height: 100%; width: 25%;
       background: linear-gradient(90deg, #f472b6, #fbbf24, #4ade80);
-      transition: width 0.1s;
+      transition: width 0.15s;
     }
-    .energy-orb {
+
+    .orb {
       position: absolute;
       padding: 16px 24px;
       border-radius: 50px;
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 900;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.1s;
+    }
+    .orb:active { transform: scale(0.9); }
+
+    .orb-good {
       background: #fde047;
       color: #0f172a;
       border: 4px solid #ffffff;
-      box-shadow: 0 0 20px rgba(253, 224, 71, 0.8);
-      cursor: pointer;
+      box-shadow: 0 0 20px rgba(253, 224, 71, 0.85);
+    }
+
+    .orb-bad {
+      background: #ef4444;
+      color: #ffffff;
+      border: 4px solid #fecaca;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.85);
     }
 
     .feedback-toast {
@@ -230,7 +312,7 @@
       top: 25px;
       padding: 14px 35px;
       border-radius: 50px;
-      font-size: 1.7rem;
+      font-size: 1.65rem;
       font-weight: 900;
       color: white;
       display: none;
@@ -243,23 +325,52 @@
 
   <div class="feedback-toast" id="toast"></div>
 
-  <!-- 封面 -->
+  <!-- 總封面 -->
   <div class="screen active" id="screen-start">
     <div style="font-size: 4rem;">⭐🚀🧱</div>
     <h1>離別大作戰：Touch Mon 闖關賽</h1>
     <p>全組輪流走出來用手指操作過三關，邊玩邊學「好好道別」！</p>
     <div style="display:flex; gap:15px; margin-bottom:25px; font-size:1.15rem; font-weight:bold; flex-wrap:wrap; justify-content:center;">
-      <span style="background:#dbeafe; color:#1d4ed8; padding:10px 20px; border-radius:15px;">第一關：左右拖拉接牌（短期 vs 長期）</span>
-      <span style="background:#fce7f3; color:#be185d; padding:10px 20px; border-radius:15px;">第二關：好好道別反應戰</span>
-      <span style="background:#fef3c7; color:#b45309; padding:10px 20px; border-radius:15px;">第三關：全組狂篤推火箭</span>
+      <span style="background:#dbeafe; color:#1d4ed8; padding:10px 20px; border-radius:15px;">第一關：親手左右拖拉分類</span>
+      <span style="background:#fce7f3; color:#be185d; padding:10px 20px; border-radius:15px;">第二關：Bing Bong 劇情與道別抉擇</span>
+      <span style="background:#fef3c7; color:#b45309; padding:10px 20px; border-radius:15px;">第三關：避開 NG 球！狂篤推火箭</span>
     </div>
-    <button class="btn-big" onclick="startStage1()">▶ 開始第一關！</button>
+    <button class="btn-big" onclick="showScreen('intro-1')">▶ 進入第一關講解</button>
   </div>
 
-  <!-- 第一關：掉落接接樂 -->
+  <!-- ================= 第一關講解版面 ================= -->
+  <div class="screen" id="intro-1">
+    <div class="stage-badge" style="background: var(--blue);">第一關｜玩法講解</div>
+    <h1>🖐️ 短期 vs 長期離別：左右拖拉分類</h1>
+    <div class="rule-card">
+      <div class="rule-item">
+        <span>1️⃣</span>
+        <span>螢幕上方會不斷有<b>「離別情境牌」</b>向下跌落嚟。</span>
+      </div>
+      <div class="rule-item">
+        <span>2️⃣</span>
+        <span>組員輪流走出來，用手指<b>按住張牌</b>，親手向左或向右拖拉（淨係篤一下係唔會郁㗎！）：</span>
+      </div>
+      <div class="rule-item">
+        <span>🔵</span>
+        <span><b style="color:var(--blue);">拖去左邊藍色區（短期離別）：</b>好快會再見（例如：放學、下課、週末前）。</span>
+      </div>
+      <div class="rule-item">
+        <span>🟠</span>
+        <span><b style="color:var(--orange);">拖去右邊橙色區（長期離別）：</b>好耐先見甚至不再見（例如：畢業、轉校、小組完結）。</span>
+      </div>
+      <div class="rule-item">
+        <span>🎯</span>
+        <span><b>過關目標：</b>全組接力成功分類 <b>8 張牌</b>！</span>
+      </div>
+    </div>
+    <button class="btn-big" style="background: var(--blue); box-shadow: 0 8px 0 #1d4ed8;" onclick="startStage1()">🚀 明白！開始第一關</button>
+  </div>
+
+  <!-- 第一關遊戲畫面 -->
   <div class="screen" id="screen-1">
     <div class="hud">
-      <span>第一關：按住跌落嘅牌，左右拖去啱嘅籃！</span>
+      <span>第一關：手指按住張牌，拖去左邊或右邊！</span>
       <span style="color:#10b981;">接中：<span id="s1-score">0</span> / 8 個</span>
     </div>
     <div class="fall-arena" id="fall-arena">
@@ -273,28 +384,86 @@
     </div>
   </div>
 
-  <!-- 第二關：好好道別選擇題 -->
+  <!-- ================= 第二關講解版面 ================= -->
+  <div class="screen" id="intro-2">
+    <div class="stage-badge" style="background: #ec4899;">第二關｜玩法講解</div>
+    <h1>🎬 Bing Bong 劇情與「好好道別」抉擇</h1>
+    <div class="rule-card">
+      <div class="rule-item">
+        <span>1️⃣</span>
+        <span>螢幕會出現 <b>8 條</b> 關於《玩轉腦朋友》Bing Bong 同日常道別嘅情境題。</span>
+      </div>
+      <div class="rule-item">
+        <span>2️⃣</span>
+        <span>組員輪流走出來，睇清楚三個選項後，用手指篤出<b>最合適、有禮貌嘅做法</b>。</span>
+      </div>
+      <div class="rule-item">
+        <span>⚡</span>
+        <span><b style="color:var(--red);">小心扣能量：</b>全組一共有 <b>100% 護盾能量</b>，每次篤錯答案會即時<b>扣 20% 能量</b>（扣晒要重新挑戰該題，千祈唔好亂撞！）。</span>
+      </div>
+      <div class="rule-item">
+        <span>🎯</span>
+        <span><b>過關目標：</b>合力完成全部 <b>8 條情境題</b>！</span>
+      </div>
+    </div>
+    <button class="btn-big" style="background: #ec4899; box-shadow: 0 8px 0 #be185d;" onclick="startStage2()">🚀 明白！開始第二關</button>
+  </div>
+
+  <!-- 第二關遊戲畫面 -->
   <div class="screen" id="screen-2">
     <div class="hud">
-      <span>第二關：道別行動配對</span>
-      <span style="color:#d97706;">關卡：<span id="s2-count">1</span> / 5</span>
-      <span style="color:#10b981;">得分：<span id="s2-score">0</span></span>
+      <span>第二關：道別抉擇（第 <span id="s2-count">1</span> / 8 題）</span>
+      <div class="energy-meter">
+        <span>⚡ 能量：</span>
+        <div class="energy-bar-bg">
+          <div class="energy-bar-fill" id="s2-energy-fill"></div>
+        </div>
+        <span id="s2-energy-text">100%</span>
+      </div>
     </div>
     <div class="quiz-box" id="s2-q">題目載入中...</div>
     <div class="options-col" id="s2-opts"></div>
   </div>
 
-  <!-- 第三關：Bing Bong 火箭狂篤 -->
+  <!-- ================= 第三關講解版面 ================= -->
+  <div class="screen" id="intro-3">
+    <div class="stage-badge" style="background: #10b981;">第三關（最終關）｜玩法講解</div>
+    <h1>🚀 全組合作：推火箭上月球！</h1>
+    <div class="rule-card">
+      <div class="rule-item">
+        <span>1️⃣</span>
+        <span><b>全員出動！</b>3–7 位組員一齊企喺 Smart TV 前面準備，能量條會隨時間慢慢下跌。</span>
+      </div>
+      <div class="rule-item">
+        <span>🟡</span>
+        <span><b style="color:#d97706;">狂篤金色能量球（+10% 能量）：</b>見到正面道別行為（例如「👋 望住對方講拜拜」、「⭐ 帶住回憶向前行」）要即刻篤爆！</span>
+      </div>
+      <div class="rule-item">
+        <span>🔴</span>
+        <span><b style="color:var(--red);">千祈唔好篤紅色球（-15% 能量）：</b>見到 NG 道別行為（例如「💥 直接轉身跑走」、「💥 喺街扮睇唔到」）一定要避開，篤中會倒扣能量！</span>
+      </div>
+      <div class="rule-item">
+        <span>🎯</span>
+        <span><b>過關目標：</b>合力將上方能量條推滿 <b>100%</b>，送火箭升空！</span>
+      </div>
+    </div>
+    <button class="btn-big" style="background: #10b981; box-shadow: 0 8px 0 #047857;" onclick="startStage3()">🚀 全組準備好！開始最終關</button>
+  </div>
+
+  <!-- 第三關遊戲畫面 -->
   <div class="screen" id="screen-3">
     <div class="hud">
-      <span>第三關：帶住回憶推火箭上月球！🚀</span>
-      <span style="color:#ec4899;">全組一齊圍埋嚟狂篤黃色能量球！</span>
+      <span>第三關：推火箭上月球！🚀</span>
+      <span style="font-size:1.25rem;">
+        <span style="color:#d97706;">🟡 篤金色球 (+10%)</span> ｜ 
+        <span style="color:#ef4444;">🔴 避開紅色 NG 球 (-15%)</span>
+      </span>
     </div>
     <div class="progress-wrap">
       <div class="progress-bar" id="rocket-bar"></div>
     </div>
     <div class="rocket-arena" id="arena">
-      <div style="color:#93c5fd; font-size:1.3rem; margin-top:15px;">能量會慢慢跌，大家快啲一齊篤爆「道別與回憶能量球」！</div>
+      <div style="color:#93c5fd; font-size:1.25rem; margin-top:12px; pointer-events:none;">小心！篤中紅色「NG 道別方式」會扣能量㗎！</div>
     </div>
   </div>
 
@@ -302,10 +471,10 @@
   <div class="screen" id="screen-win">
     <div style="font-size: 4.5rem;">🎉🚀🌕</div>
     <h1>全組挑戰成功！</h1>
-    <p style="font-size: 1.55rem; color: #1e293b; max-width: 750px; line-height: 1.6;">
-      1️⃣ 我哋分得清<b>短期</b>同<b>長期離別</b><br>
-      2️⃣ 學識唔好直接轉身走，用<b>微笑、揮手同多謝</b>好好道別<br>
-      3️⃣ 就算要分開，都可以好似阿樂同 Bing Bong 咁，<b>帶住開心嘅回憶繼續向前行</b>！
+    <p style="font-size: 1.5rem; color: #1e293b; max-width: 780px; line-height: 1.6;">
+      1️⃣ 分得清<b>短期</b>同<b>長期離別</b><br>
+      2️⃣ 唔好直接轉身走，用<b>望住對方、微笑、揮手同多謝</b>好好道別<br>
+      3️⃣ 學似阿樂同 Bing Bong 咁，<b>放手唔代表忘記，而係帶住開心嘅回憶繼續前進</b>！
     </p>
     <button class="btn-big" onclick="location.reload()">🔄 再玩一次</button>
   </div>
@@ -321,10 +490,10 @@
       t.innerText = msg;
       t.style.background = bg;
       t.style.display = 'block';
-      setTimeout(() => { t.style.display = 'none'; }, 850);
+      setTimeout(() => { t.style.display = 'none'; }, 1000);
     }
 
-    /* ================= 第一關：真實掉落＋手指左右拖拉 ================= */
+    /* ================= 第一關：必須親手拖拉入左右區 ================= */
     const sortPool = [
       { text: "🏫 放學", type: "short" },
       { text: "🎓 畢業", type: "long" },
@@ -361,17 +530,15 @@
       const el = document.createElement('div');
       el.className = 'falling-item';
       el.innerText = data.text;
-      el.dataset.type = data.type;
 
-      // 初始放喺正中間上方跌落嚟，逼組員要向左或向右拖
-      let posX = arena.clientWidth / 2;
-      let posY = -40;
+      const centerX = arena.clientWidth / 2;
+      let posX = centerX;
+      let posY = -30;
       let isDragging = false;
 
       el.style.left = posX + 'px';
       el.style.top = posY + 'px';
 
-      // Touch / Mouse 拖拉控制
       el.onpointerdown = (e) => {
         isDragging = true;
         el.classList.add('dragging');
@@ -381,7 +548,7 @@
       el.onpointermove = (e) => {
         if (!isDragging) return;
         const rect = arena.getBoundingClientRect();
-        posX = Math.max(110, Math.min(rect.width - 110, e.clientX - rect.left));
+        posX = Math.max(120, Math.min(rect.width - 120, e.clientX - rect.left));
         posY = Math.max(20, Math.min(rect.height - 60, e.clientY - rect.top));
         el.style.left = posX + 'px';
         el.style.top = posY + 'px';
@@ -400,169 +567,253 @@
       clearInterval(fallLoop);
       fallLoop = setInterval(() => {
         if (!isDragging) {
-          posY += 2.6; // 掉落速度（適合初中生走出來拖拉）
+          posY += 2.4;
           el.style.top = posY + 'px';
         }
 
-        // 跌到底部判定落入左邊（short）定右邊（long）
         if (posY >= arena.clientHeight - 95) {
           clearInterval(fallLoop);
           const half = arena.clientWidth / 2;
+
+          if (Math.abs(posX - half) < 60) {
+            showToast("⚠️ 要拖去左邊或右邊籃呀！", "#f59e0b");
+            el.remove();
+            activeCard = null;
+            setTimeout(spawnFallingCard, 450);
+            return;
+          }
+
           const landedSide = posX < half ? 'short' : 'long';
 
           if (landedSide === data.type) {
             s1Caught++;
             document.getElementById('s1-score').innerText = s1Caught;
-            showToast("✅ 接啱籃啦！", "#10b981");
+            showToast("✅ 拖啱籃啦！", "#10b981");
             el.remove();
             activeCard = null;
 
             if (s1Caught >= 8) {
-              setTimeout(startStage2, 800);
+              // 過關後先顯示第二關玩法講解版面
+              setTimeout(() => showScreen('intro-2'), 800);
             } else {
               setTimeout(spawnFallingCard, 350);
             }
           } else {
-            showToast("❌ 跌錯邊啦！呢個係" + (data.type === 'short' ? '短期' : '長期') + "離別！", "#ef4444");
+            showToast("❌ 拖錯邊啦！再試下！", "#ef4444");
             el.remove();
             activeCard = null;
-            setTimeout(spawnFallingCard, 500);
+            setTimeout(spawnFallingCard, 450);
           }
         }
       }, 20);
     }
 
-    /* ================= 第二關：道別行動配對 ================= */
+    /* ================= 第二關：8題全新不重複（緊扣Bing Bong劇情＋道別禮儀＋扣能量） ================= */
     const quizData = [
       {
-        q: "1. 放學同同學行到分岔口要分開，點做先唔會令人覺得你無禮貌？",
+        q: "1.【Bing Bong 劇情】點解 Bing Bong 最後要喺架火箭車跳落去，唔跟阿樂一齊飛上去？",
         opts: [
-          { text: "A. 望住對方微笑揮手，講句「我走先啦，聽日見！」", ok: true },
-          { text: "B. 唔出聲，直接轉身急步跑走", ok: false },
-          { text: "C. 繼續低頭狂撳電話，當睇唔到對方", ok: false }
+          { text: "A. 因為架車太重飛唔起，佢選擇放手成全阿樂上去救韋莉", ok: true },
+          { text: "B. 因為 Bing Bong 唔鍾意阿樂，想留喺記憶垃圾場", ok: false, reason: "錯！Bing Bong 好重視阿樂同韋莉，佢係為咗成全對方先放手！" },
+          { text: "C. 因為架車壞咗，佢唔小心跣腳跌落去", ok: false, reason: "錯！佢係刻意跳落車減輕重量㗎！" }
         ]
       },
       {
-        q: "2. 面對離別時，有人會喊、有人會笑住揮手、有人會扮冇嘢。邊種先係「正常」？",
+        q: "2.【道別態度】放學同同學行到分岔口要分開，點解「唔好直接轉身走」？",
         opts: [
-          { text: "A. 只有喊先代表重視對方", ok: false },
-          { text: "B. 全部都係正常！唔同人面對離別有唔同反應同感受", ok: true },
-          { text: "C. 扮冇嘢代表佢一定好冷血", ok: false }
+          { text: "A. 因為學校規定一定要講拜拜先出得校門", ok: false, reason: "唔係校規問題，而係人際尊重呀！" },
+          { text: "B. 直接轉身走會令對方覺得被無視、好冷漠，望住講聲「聽日見」先有禮貌", ok: true },
+          { text: "C. 因為直接轉身走會行錯路", ok: false, reason: "再諗真啲，對方心入面會有咩感覺？" }
         ]
       },
       {
-        q: "3. 喺《玩轉腦朋友》入面，點解 Bing Bong 最後要跳落架車度同阿樂講再見？",
+        q: "3.【Bing Bong 金句】Bing Bong 消失前對阿樂講：「帶佢去月球，好嗎？」呢句話代表咩意思？",
         opts: [
-          { text: "A. 因為佢唔想再見到阿樂", ok: false },
-          { text: "B. 因為架車太重，佢選擇放手成全阿樂上去救韋莉", ok: true },
-          { text: "C. 因為佢唔小心跌咗落去", ok: false }
+          { text: "A. 叫阿樂忘記所有過去，當冇識過自己", ok: false, reason: "相反！佢係希望阿樂記住大家嘅約定！" },
+          { text: "B. 雖然自己要離開，但希望阿樂帶住彼此嘅回憶同約定繼續向前行", ok: true },
+          { text: "C. 叫阿樂買張機票飛去太空", ok: false, reason: "呢個係比喻嚟㗎，扣能量！" }
         ]
       },
       {
-        q: "4. 朋友下星期要轉校（長期離別），你想之後繼續保持聯絡，點樣問最得體？",
+        q: "4.【離別反應】面對離別時，有人會喊、有人會微笑揮手、有人會沉默。邊種反應先係「正確」？",
         opts: [
-          { text: "A. 「你一定要即刻俾 IG 我，唔俾就唔係朋友！」", ok: false },
-          { text: "B. 「之後少啲見，介唔介意 exchange 個 IG？唔方便都唔緊要！」", ok: true },
-          { text: "C. 咩都唔問，之後喺街撞到又扮唔識", ok: false }
+          { text: "A. 一定要喊到好大聲先代表重視段友誼", ok: false, reason: "唔一定喊先代表重視，每個人表達情緒方式唔同！" },
+          { text: "B. 唔講嘢就代表佢好冷血、一啲都唔在乎", ok: false, reason: "沉默有時只係因為唔捨得或者唔知講咩好！" },
+          { text: "C. 每個人面對離別都有唔同反應同感受，全部都係正常同應該被接納", ok: true }
         ]
       },
       {
-        q: "5. 好似我哋上一堂砌 LEGO 咁，當重要嘅人要離開，點樣先可以「放下不捨」？",
+        q: "5.【情境應對】喺 M 記同朋友傾完計，你趕時間要走，但對方仲係咁講緊打機。點樣收尾最得體？",
         opts: [
-          { text: "A. 唔好再諗起呢個人，當冇識過", ok: false },
-          { text: "B. 感謝一齊合作過嘅時光，帶住開心嘅回憶繼續向前行", ok: true },
-          { text: "C. 每日都唔開心，唔肯再識新朋友", ok: false }
+          { text: "A. 趁佢飲水嗰陣靜悄悄執嘢走人", ok: false, reason: "不辭而別會令對方好錯愕，扣能量！" },
+          { text: "B. 「你講嗰招好勁喎！不過我屋企人催我返去，下次再聽你講，拜拜！」", ok: true },
+          { text: "C. 大聲打斷佢：「好悶呀唔好再講，我走先！」", ok: false, reason: "咁樣講太傷人啦，扣能量！" }
+        ]
+      },
+      {
+        q: "6.【放下不捨】睇完《玩轉腦朋友》，當我哋好唔捨得某個離開嘅人（或寵物），點樣幫自己「放下不捨」？",
+        opts: [
+          { text: "A. 感謝一齊相處過嘅美好時光，將回憶放喺心入面，繼續過好自己嘅生活", ok: true },
+          { text: "B. 掉晒所有同佢有關嘅嘢，逼自己以後唔准再識新朋友", ok: false, reason: "逃避同封閉自己並唔係真正放下，扣能量！" },
+          { text: "C. 每日都發脾氣怪責點解佢要離開", ok: false, reason: "發脾氣解決唔到離別帶嚟嘅失落，扣能量！" }
+        ]
+      },
+      {
+        q: "7.【保持聯絡】好朋友下星期要轉校（長期離別），你想問佢拎 IG 保持聯絡，點講最尊重對方？",
+        opts: [
+          { text: "A. 「你唔俾 IG 我就即刻絕交！」", ok: false, reason: "逼人會令對方好有壓力，扣能量！" },
+          { text: "B. 「之後少啲見，介唔介意 exchange 個 IG？唔方便都唔緊要㗎！」", ok: true },
+          { text: "C. 咩都唔問，之後喺街撞到就扮睇唔到", ok: false, reason: "咁樣會錯過保持聯絡嘅機會，好可惜！" }
+        ]
+      },
+      {
+        q: "8.【如果歷史重演】如果俾你返去過去，重新經歷一次小學畢業道別，以下邊種做法最唔會留低遺憾？",
+        opts: [
+          { text: "A. 怕尷尬所以一放學就衝返屋企，咩人都唔理", ok: false, reason: "直接跑走事後好容易後悔冇好好講再見！" },
+          { text: "B. 主動望住同學或老師講聲「多謝你之前嘅照顧，祝你升中順利！」", ok: true },
+          { text: "C. 喺 WhatsApp 群組留個句號就即刻退出群組", ok: false, reason: "突然退群會令人覺得好無禮貌，扣能量！" }
         ]
       }
     ];
 
     let s2Index = 0;
-    let s2Score = 0;
+    let s2Energy = 100;
 
     function startStage2() {
       s2Index = 0;
-      s2Score = 0;
+      s2Energy = 100;
+      updateS2Energy();
       showScreen('screen-2');
       renderQuiz();
     }
 
+    function updateS2Energy() {
+      const fill = document.getElementById('s2-energy-fill');
+      const txt = document.getElementById('s2-energy-text');
+      fill.style.width = s2Energy + '%';
+      txt.innerText = s2Energy + '%';
+      if (s2Energy > 50) fill.style.background = '#10b981';
+      else if (s2Energy > 20) fill.style.background = '#f59e0b';
+      else fill.style.background = '#ef4444';
+    }
+
     function renderQuiz() {
       document.getElementById('s2-count').innerText = s2Index + 1;
-      document.getElementById('s2-score').innerText = s2Score;
       const item = quizData[s2Index];
       document.getElementById('s2-q').innerText = item.q;
       const box = document.getElementById('s2-opts');
       box.innerHTML = '';
+
       item.opts.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'btn-opt';
         btn.innerText = opt.text;
         btn.onclick = () => {
           if (opt.ok) {
-            s2Score += 20;
-            showToast("🎯 啱晒！好有社交智慧！", "#10b981");
+            showToast("🎯 啱晒！能量保持！", "#10b981");
             s2Index++;
             if (s2Index >= quizData.length) {
-              setTimeout(startStage3, 900);
+              // 過關後先顯示第三關玩法講解版面
+              setTimeout(() => showScreen('intro-3'), 900);
             } else {
               renderQuiz();
             }
           } else {
-            showToast("😅 呢招有啲尷尬喎，再揀過！", "#ef4444");
+            btn.classList.add('wrong-flash');
+            s2Energy = Math.max(0, s2Energy - 20);
+            updateS2Energy();
+            showToast("💥 扣 20% 能量！" + (opt.reason || "再揀過！"), "#ef4444");
+
+            if (s2Energy <= 0) {
+              setTimeout(() => {
+                alert("⚡ 能量耗盡啦！全組重新補充能量再挑戰呢一題！");
+                s2Energy = 100;
+                updateS2Energy();
+                renderQuiz();
+              }, 400);
+            }
           }
         };
         box.appendChild(btn);
       });
     }
 
-    /* ================= 第三關：全組狂篤推火箭 ================= */
-    let rocketPower = 20;
+    /* ================= 第三關：正負能量球大混戰 ================= */
+    let rocketPower = 25;
     let rocketInterval = null;
     let orbInterval = null;
-    const orbLabels = ["👋 望住講拜拜", "🙏 多謝一齊玩", "⭐ 帶住回憶前進", "🧱 LEGO 合體精神", "📱 保持聯絡", "😊 微笑祝福"];
+
+    const goodOrbs = [
+      "👋 望住對方講拜拜",
+      "🙏 多謝一齊玩過",
+      "⭐ 帶住回憶向前行",
+      "🧱 LEGO 合體精神",
+      "📱 禮貌問拎 IG",
+      "😊 微笑揮手祝福",
+      "🤝 放手成全對方"
+    ];
+
+    const badOrbs = [
+      "💥 直接轉身跑走",
+      "💥 已讀不回消失",
+      "💥 喺街扮睇唔到",
+      "💥 不辭而別靜雞雞走",
+      "💥 逼人一定要俾IG",
+      "💥 突然退出群組"
+    ];
 
     function startStage3() {
-      rocketPower = 20;
+      rocketPower = 25;
       showScreen('screen-3');
       updateRocketBar();
 
       rocketInterval = setInterval(() => {
-        rocketPower = Math.max(5, rocketPower - 1.2);
+        rocketPower = Math.max(5, rocketPower - 0.9);
         updateRocketBar();
-      }, 150);
+      }, 160);
 
       spawnOrb();
       spawnOrb();
-      orbInterval = setInterval(spawnOrb, 650);
+      orbInterval = setInterval(spawnOrb, 600);
     }
 
     function spawnOrb() {
       const arena = document.getElementById('arena');
-      if (arena.children.length > 7) return;
+      if (arena.children.length > 9) return;
 
+      const isGood = Math.random() < 0.65;
       const orb = document.createElement('div');
-      orb.className = 'energy-orb';
-      orb.innerText = orbLabels[Math.floor(Math.random() * orbLabels.length)];
-      
-      const maxX = arena.clientWidth - 240;
+      orb.className = 'orb ' + (isGood ? 'orb-good' : 'orb-bad');
+      orb.innerText = isGood
+        ? goodOrbs[Math.floor(Math.random() * goodOrbs.length)]
+        : badOrbs[Math.floor(Math.random() * badOrbs.length)];
+
+      const maxX = arena.clientWidth - 260;
       const maxY = arena.clientHeight - 90;
       orb.style.left = Math.max(20, Math.random() * maxX) + 'px';
       orb.style.top = Math.max(55, Math.random() * maxY) + 'px';
 
       orb.onpointerdown = () => {
-        rocketPower = Math.min(100, rocketPower + 9);
-        updateRocketBar();
-        orb.remove();
-        if (rocketPower >= 100) {
-          clearInterval(rocketInterval);
-          clearInterval(orbInterval);
-          showToast("🚀 火箭成功升空！", "#10b981");
-          setTimeout(() => showScreen('screen-win'), 700);
+        if (isGood) {
+          rocketPower = Math.min(100, rocketPower + 10);
+          updateRocketBar();
+          orb.remove();
+          if (rocketPower >= 100) {
+            clearInterval(rocketInterval);
+            clearInterval(orbInterval);
+            showToast("🚀 火箭成功升空！", "#10b981");
+            setTimeout(() => showScreen('screen-win'), 700);
+          }
+        } else {
+          rocketPower = Math.max(0, rocketPower - 15);
+          updateRocketBar();
+          showToast("💥 篤錯 NG 道別行為！扣 15% 能量！", "#ef4444");
+          orb.remove();
         }
       };
 
       arena.appendChild(orb);
-      setTimeout(() => { if (orb.parentNode) orb.remove(); }, 2500);
+      setTimeout(() => { if (orb.parentNode) orb.remove(); }, 2600);
     }
 
     function updateRocketBar() {
