@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>社交小組第五節｜離別互動抽卡機</title>
+  <style>
+    :root {
+      --bg-cream: #fef9ef;
+      --card-yellow: #fde68a;
+      --card-orange: #fdba74;
+      --accent-blue: #3b82f6;
+      --accent-pink: #ec4899;
+      --text-dark: #334155;
+      --border-warm: #f59e0b;
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: var(--bg-cream);
+      background-image: radial-gradient(#fde68a 2px, transparent 2px);
+      background-size: 40px 40px;
+      color: var(--text-dark);
+      font-family: "PingFang HK", "Microsoft JhengHei", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      background: #ffffff;
+      padding: 15px 40px;
+      border-radius: 30px;
+      border: 4px solid var(--border-warm);
+      box-shadow: 0 8px 0 #fcd34d;
+      margin-bottom: 25px;
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #d97706;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .btn-reset {
+      background: #fef3c7;
+      border: 2px solid #f59e0b;
+      color: #b45309;
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    /* 9張星星任務卡 */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      width: 100%;
+      max-width: 1100px;
+      flex: 1;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border: 4px solid #f59e0b;
+      border-radius: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      min-height: 160px;
+      box-shadow: 0 8px 0 #fbbf24;
+      transition: transform 0.15s;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .card:active {
+      transform: translateY(6px);
+      box-shadow: 0 2px 0 #fbbf24;
+    }
+
+    .card.opened {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+      box-shadow: none;
+      opacity: 0.6;
+    }
+
+    .star-icon {
+      font-size: 3rem;
+      margin-bottom: 5px;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #b45309;
+    }
+
+    .card.opened .card-title {
+      color: #64748b;
+    }
+
+    /* 彈窗設計 */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(51, 65, 85, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      padding: 30px;
+    }
+
+    .modal {
+      background: #ffffff;
+      border: 6px solid #f59e0b;
+      border-radius: 35px;
+      max-width: 850px;
+      width: 100%;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      animation: pop 0.25s ease-out;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 22px;
+      border-radius: 25px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .question-text {
+      font-size: 2.2rem;
+      font-weight: bold;
+      line-height: 1.5;
+      color: #1e293b;
+      margin: 15px 0 30px 0;
+    }
+
+    .helper-box {
+      background: #eff6ff;
+      border-left: 6px solid #3b82f6;
+      padding: 18px 25px;
+      border-radius: 12px;
+      font-size: 1.35rem;
+      color: #1e40af;
+      text-align: left;
+      margin-bottom: 25px;
+      display: none;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-size: 1.4rem;
+      font-weight: bold;
+      padding: 15px 32px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .btn-help {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .btn-done {
+      background: #f59e0b;
+      color: white;
+      box-shadow: 0 5px 0 #b45309;
+    }
+
+    .btn-done:active {
+      transform: translateY(4px);
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <h1>⭐ 離別星星抽卡機（第五節）</h1>
+      <div class="subtitle">輪流走出來按一粒星星！答唔出可以搵一位組員「LEGO 合體」幫手 🤝</div>
+    </div>
+    <button class="btn-reset" onclick="resetAll()">🔄 重新洗牌</button>
+  </header>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="modal-overlay" id="overlay">
+    <div class="modal" id="modalBox">
+      <div class="tag" id="modalTag">類別</div>
+      <div class="question-text" id="modalQ">問題內容</div>
+      <div class="helper-box" id="helperBox"></div>
+      <div class="btn-group">
+        <button class="btn btn-help" id="helpBtn" onclick="toggleHelp()">💡 睇下提示 / 句式參考</button>
+        <button class="btn btn-done" onclick="closeModal()">✅ 完成分享</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 緊扣你份簡報（LEGO合體、短期vs長期離別、Bing Bong、個人道別經歷）嘅 9 條抽卡題目
+    const cards = [
+      {
+        tag: "🎬 電影觀察：Bing Bong",
+        color: "#3b82f6",
+        q: "頭先睇完《玩轉腦朋友》，Bing Bong 消失嗰一刻，阿樂（Joy）心入面有邊 2 種感受？",
+        help: "提示：除咗「好唔捨得／好難過」，阿樂亦都明白 Bing Bong 係為咗幫佢返上去，所以有「感激」同「決定要帶住佢份心意繼續前進」嘅決心。"
+      },
+      {
+        tag: "⚡ 短期離別挑戰",
+        color: "#10b981",
+        q: "【情境示範】放學／週末前同同學講拜拜，點樣講先唔會「直接轉身走」咁冷漠？請向右手邊組員示範一次！",
+        help: "自然句式：望住對方講「我走先啦，聽日／下星期見！」＋ 揮一揮手就已經好有禮貌！"
+      },
+      {
+        tag: "🧱 LEGO 合體特別卡",
+        color: "#f59e0b",
+        q: "【神隊友任務】請你邀請一位組員同你「合體」！一人講一句：如果好朋友要轉校／移民，你會點同佢道別？",
+        help: "句式參考：「呢段時間多謝你成日同我一齊玩，去到新學校加油，得閒保持聯絡！」"
+      },
+      {
+        tag: "💭 個人經歷分享",
+        color: "#ec4899",
+        q: "回想一次你同人（或者寵物／舊同學）離別嘅經歷：當時你有咩感受？你用咗咩方式道別？",
+        help: "唔使講好長，可以講：「小學畢業嗰陣，我同某某講咗聲拜拜就走咗，其實當時有少少唔捨得。」"
+      },
+      {
+        tag: "⏪ 如果歷史重演...",
+        color: "#8b5cf6",
+        q: "如果俾你返去過去，重新經歷一次某個「離別場面」（例如小學畢業、舊同學轉校），你會唔會改變當時嘅道別方式？點解？",
+        help: "例如：「如果重演，我會唔好咁怕醜，主動同佢影張相／講聲多謝先走。」"
+      },
+      {
+        tag: "🎬 電影反思：放下不捨",
+        color: "#3b82f6",
+        q: "Bing Bong 臨走前講：『帶佢去月球，好嗎？』喺現實生活入面，當重要嘅人離開，我哋可以點樣「帶住回憶」繼續向前行？",
+        help: "提示：離別唔代表忘記。將一齊開心過嘅回憶放喺心入面，或者繼續保持聯絡，都係放下唔捨嘅方法。"
+      },
+      {
+        tag: "📱 長期離別：保持聯絡",
+        color: "#10b981",
+        q: "頭先大風吹問到「離開學校後想同邊個保持聯絡」：如果你想問同學／組員拎 IG 或 WhatsApp，點樣問最自然？",
+        help: "尊重界線問法：「之後可能少啲見，介唔介意 exchange 個 IG？唔方便都唔緊要㗎！」"
+      },
+      {
+        tag: "🐾 面對離別嘅反應",
+        color: "#ec4899",
+        q: "每個人面對離別都有唔同反應（有人會喊、有人會扮冇嘢、有人會直接轉身走）。你覺得自己通常係邊一種？點解？",
+        help: "所有反應都係正常嘅！有時「扮冇嘢」只係因為怕尷尬或者唔知講咩好。"
+      },
+      {
+        tag: "🌟 給小組的練習",
+        color: "#f59e0b",
+        q: "【預習道別】雖然今日係第五節，仲未係最後一堂，但試下向全組講一句「今日一齊上堂嘅感受」或者「多謝」！",
+        help: "簡單一句：「今日玩大風吹幾開心，多謝大家！」就已經好棒！"
+      }
+    ];
+
+    let opened = new Set();
+
+    function render() {
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '';
+      cards.forEach((c, i) => {
+        const div = document.createElement('div');
+        div.className = 'card' + (opened.has(i) ? ' opened' : '');
+        div.onclick = () => openCard(i);
+        div.innerHTML = `
+          <div class="star-icon">${opened.has(i) ? '✅' : '⭐'}</div>
+          <div class="card-title">#${i + 1} ${opened.has(i) ? '已分享' : c.tag.split('：')[0]}</div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function openCard(i) {
+      opened.add(i);
+      render();
+      const c = cards[i];
+      const tag = document.getElementById('modalTag');
+      tag.innerText = c.tag;
+      tag.style.backgroundColor = c.color;
+      document.getElementById('modalBox').style.borderColor = c.color;
+      document.getElementById('modalQ').innerText = c.q;
+
+      const helpBox = document.getElementById('helperBox');
+      helpBox.innerText = c.help;
+      helpBox.style.display = 'none';
+      document.getElementById('helpBtn').innerText = '💡 睇下提示 / 句式參考';
+
+      document.getElementById('overlay').style.display = 'flex';
+    }
+
+    function toggleHelp() {
+      const box = document.getElementById('helperBox');
+      const btn = document.getElementById('helpBtn');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        btn.innerText = '🙈 收起提示';
+      } else {
+        box.style.display = 'none';
+        btn.innerText = '💡 睇下提示 / 句式參考';
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('overlay').style.display = 'none';
+    }
+
+    function resetAll() {
+      if (confirm('確定要重設所有星星卡嗎？')) {
+        opened.clear();
+        render();
+      }
+    }
+
+    render();
+  </script>
+</body>
+</html>
