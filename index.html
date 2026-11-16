@@ -257,7 +257,7 @@
       75% { transform: translateX(10px); }
     }
 
-    /* ================= 第三關：正負能量球大混戰 ================= */
+    /* ================= 第三關：同色能量球大混戰（純靠睇字判斷） ================= */
     .rocket-arena {
       position: relative;
       width: 100%;
@@ -281,6 +281,7 @@
       transition: width 0.15s;
     }
 
+    /* 全部能量球統一為相同金色外觀 */
     .orb {
       position: absolute;
       padding: 16px 24px;
@@ -289,23 +290,13 @@
       font-weight: 900;
       cursor: pointer;
       white-space: nowrap;
-      transition: transform 0.1s;
-    }
-    .orb:active { transform: scale(0.9); }
-
-    .orb-good {
       background: #fde047;
       color: #0f172a;
       border: 4px solid #ffffff;
       box-shadow: 0 0 20px rgba(253, 224, 71, 0.85);
+      transition: transform 0.1s;
     }
-
-    .orb-bad {
-      background: #ef4444;
-      color: #ffffff;
-      border: 4px solid #fecaca;
-      box-shadow: 0 0 20px rgba(239, 68, 68, 0.85);
-    }
+    .orb:active { transform: scale(0.9); }
 
     .feedback-toast {
       position: fixed;
@@ -333,7 +324,7 @@
     <div style="display:flex; gap:15px; margin-bottom:25px; font-size:1.15rem; font-weight:bold; flex-wrap:wrap; justify-content:center;">
       <span style="background:#dbeafe; color:#1d4ed8; padding:10px 20px; border-radius:15px;">第一關：親手左右拖拉分類</span>
       <span style="background:#fce7f3; color:#be185d; padding:10px 20px; border-radius:15px;">第二關：Bing Bong 劇情與道別抉擇</span>
-      <span style="background:#fef3c7; color:#b45309; padding:10px 20px; border-radius:15px;">第三關：避開 NG 球！狂篤推火箭</span>
+      <span style="background:#fef3c7; color:#b45309; padding:10px 20px; border-radius:15px;">第三關：睇真先篤！狂推火箭上月球</span>
     </div>
     <button class="btn-big" onclick="showScreen('intro-1')">▶ 進入第一關講解</button>
   </div>
@@ -428,19 +419,23 @@
   <!-- ================= 第三關講解版面 ================= -->
   <div class="screen" id="intro-3">
     <div class="stage-badge" style="background: #10b981;">第三關（最終關）｜玩法講解</div>
-    <h1>🚀 全組合作：推火箭上月球！</h1>
+    <h1>🚀 全組合作：睇真先篤推火箭！</h1>
     <div class="rule-card">
       <div class="rule-item">
         <span>1️⃣</span>
-        <span><b>全員出動！</b>3–7 位組員一齊企喺 Smart TV 前面準備，能量條會隨時間慢慢下跌。</span>
+        <span><b>全員出動！</b>3–7 位組員一齊企喺 Smart TV 前面準備，火箭能量會隨時間慢慢下跌。</span>
       </div>
       <div class="rule-item">
-        <span>🟡</span>
-        <span><b style="color:#d97706;">狂篤金色能量球（+10% 能量）：</b>見到正面道別行為（例如「👋 望住對方講拜拜」、「⭐ 帶住回憶向前行」）要即刻篤爆！</span>
+        <span>👀</span>
+        <span><b>全部能量球都係同一隻色！</b>一定要睇清楚球上面嘅文字先好出手：</span>
       </div>
       <div class="rule-item">
-        <span>🔴</span>
-        <span><b style="color:var(--red);">千祈唔好篤紅色球（-15% 能量）：</b>見到 NG 道別行為（例如「💥 直接轉身跑走」、「💥 喺街扮睇唔到」）一定要避開，篤中會倒扣能量！</span>
+        <span>✅</span>
+        <span><b style="color:var(--green);">篤啱「好好道別」行為（+10% 能量）：</b>例如「👋 望住對方講拜拜」、「⭐ 帶住回憶向前行」。</span>
+      </div>
+      <div class="rule-item">
+        <span>❌</span>
+        <span><b style="color:var(--red);">篤錯「NG 道別」行為（-15% 能量）：</b>例如「🏃 直接轉身跑走」、「🙈 喺街扮睇唔到」，篤中會倒扣能量！</span>
       </div>
       <div class="rule-item">
         <span>🎯</span>
@@ -455,15 +450,15 @@
     <div class="hud">
       <span>第三關：推火箭上月球！🚀</span>
       <span style="font-size:1.25rem;">
-        <span style="color:#d97706;">🟡 篤金色球 (+10%)</span> ｜ 
-        <span style="color:#ef4444;">🔴 避開紅色 NG 球 (-15%)</span>
+        <span style="color:#10b981;">✅ 好好道別 (+10%)</span> ｜ 
+        <span style="color:#ef4444;">❌ NG 行為 (-15%)</span>
       </span>
     </div>
     <div class="progress-wrap">
       <div class="progress-bar" id="rocket-bar"></div>
     </div>
     <div class="rocket-arena" id="arena">
-      <div style="color:#93c5fd; font-size:1.25rem; margin-top:12px; pointer-events:none;">小心！篤中紅色「NG 道別方式」會扣能量㗎！</div>
+      <div style="color:#93c5fd; font-size:1.25rem; margin-top:12px; pointer-events:none;">全部球都係金色！睇清楚文字先好篤，篤錯 NG 行為會扣 15% 能量！</div>
     </div>
   </div>
 
@@ -593,7 +588,6 @@
             activeCard = null;
 
             if (s1Caught >= 8) {
-              // 過關後先顯示第二關玩法講解版面
               setTimeout(() => showScreen('intro-2'), 800);
             } else {
               setTimeout(spawnFallingCard, 350);
@@ -608,7 +602,7 @@
       }, 20);
     }
 
-    /* ================= 第二關：8題全新不重複（緊扣Bing Bong劇情＋道別禮儀＋扣能量） ================= */
+    /* ================= 第二關：8題全新不重複 ================= */
     const quizData = [
       {
         q: "1.【Bing Bong 劇情】點解 Bing Bong 最後要喺架火箭車跳落去，唔跟阿樂一齊飛上去？",
@@ -713,7 +707,6 @@
             showToast("🎯 啱晒！能量保持！", "#10b981");
             s2Index++;
             if (s2Index >= quizData.length) {
-              // 過關後先顯示第三關玩法講解版面
               setTimeout(() => showScreen('intro-3'), 900);
             } else {
               renderQuiz();
@@ -738,7 +731,7 @@
       });
     }
 
-    /* ================= 第三關：正負能量球大混戰 ================= */
+    /* ================= 第三關：同色能量球大混戰（唔分顏色、純靠睇文字） ================= */
     let rocketPower = 25;
     let rocketInterval = null;
     let orbInterval = null;
@@ -754,12 +747,12 @@
     ];
 
     const badOrbs = [
-      "💥 直接轉身跑走",
-      "💥 已讀不回消失",
-      "💥 喺街扮睇唔到",
-      "💥 不辭而別靜雞雞走",
-      "💥 逼人一定要俾IG",
-      "💥 突然退出群組"
+      "🏃 直接轉身跑走",
+      "📱 已讀不回消失",
+      "🙈 喺街扮睇唔到",
+      "🚶 不辭而別靜雞雞走",
+      "😤 逼人一定要俾IG",
+      "🚪 突然退出群組"
     ];
 
     function startStage3() {
@@ -768,13 +761,13 @@
       updateRocketBar();
 
       rocketInterval = setInterval(() => {
-        rocketPower = Math.max(5, rocketPower - 0.9);
+        rocketPower = Math.max(5, rocketPower - 0.8);
         updateRocketBar();
-      }, 160);
+      }, 170);
 
       spawnOrb();
       spawnOrb();
-      orbInterval = setInterval(spawnOrb, 600);
+      orbInterval = setInterval(spawnOrb, 650);
     }
 
     function spawnOrb() {
@@ -783,7 +776,7 @@
 
       const isGood = Math.random() < 0.65;
       const orb = document.createElement('div');
-      orb.className = 'orb ' + (isGood ? 'orb-good' : 'orb-bad');
+      orb.className = 'orb'; // 全部統一相同外觀，唔分紅色同黃色
       orb.innerText = isGood
         ? goodOrbs[Math.floor(Math.random() * goodOrbs.length)]
         : badOrbs[Math.floor(Math.random() * badOrbs.length)];
@@ -797,6 +790,7 @@
         if (isGood) {
           rocketPower = Math.min(100, rocketPower + 10);
           updateRocketBar();
+          showToast("✅ 啱晒！+10% 能量", "#10b981");
           orb.remove();
           if (rocketPower >= 100) {
             clearInterval(rocketInterval);
@@ -807,13 +801,13 @@
         } else {
           rocketPower = Math.max(0, rocketPower - 15);
           updateRocketBar();
-          showToast("💥 篤錯 NG 道別行為！扣 15% 能量！", "#ef4444");
+          showToast("❌ 呢個係 NG 行為！扣 15% 能量！", "#ef4444");
           orb.remove();
         }
       };
 
       arena.appendChild(orb);
-      setTimeout(() => { if (orb.parentNode) orb.remove(); }, 2600);
+      setTimeout(() => { if (orb.parentNode) orb.remove(); }, 2800);
     }
 
     function updateRocketBar() {
